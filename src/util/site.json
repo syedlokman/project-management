@@ -1,12 +1,12 @@
 {
   "meta": {
-    "title": "Foundation",
+    "title": "Course65",
     "titleTemplate": "%s",
-    "description": "A starter to launch your blazing fast personal website and a blog, Built with Gatsby and Netlify CMS. Made with ❤ by Stackrole",
-    "siteUrl": "https://foundation.stackrole.com",
+    "description": "Learn better, faster and smarter with course65.",
+    "siteUrl": "https://course65.netlify.app/",
     "image": "/assets/stackrole.png",
     "iconimage": "/assets/stackrole.png",
-    "twitterUsername": "@stackrole"
+    "twitterUsername": "@Course65"
   },
   "ga": "UA-XXXXXXXXX-X"
 }
