@@ -1,8 +1,8 @@
 ---
 template: index-page
 slug: /
-title: Course55
-tagline: Learn better, faster and smarter with course55
+title: Course65
+tagline: Learn better, faster and smarter with course65
 featuredImage: /assets/toa-heftiba-0rlfirsdvzu-unsplash.jpg
 cta:
   ctaText: Start Learning Today
