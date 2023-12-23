@@ -1,7 +1,7 @@
 ---
 template: blog-post
 title: "Genomic Tools Module 3 Alignment & Sequence Variation "
-slug: "Genomic_Tools_Module_3_Alignment_Sequence_Variation "
+slug: genomic_3
 date: 2023-12-23 22:21
 description: "Genomic Tools Module 3 Alignment & Sequence Variation "
 ---
