@@ -1,122 +1,165 @@
 ---
-template: blog-post
-title: BED Tools II
-slug: bed_2
-date: 2023-12-24 05:19
-description: BED Tools II
+title: BED Tools I
+slug: bed_1
+date: 2023-12-24 05:20
+description: BED Tools I
 ---
-"In this section we will illustrate
-some of the other functionality that is implemented in the BEDtools package. So we're going to be looking first at
-how we can perform some basic five format conversion and the very useful ones to convert from
-bamtobed format and the other way around. So just like we've done before,
-let's see bedtools. Let's just try them too. Bed. [SOUND]
-Okay. And we can read the usage,
-we can read information about the command line options and the basic usage,
-bedtools bamtobed, that's the name of the sub command and number of
-options and then the input bam file. And a few interesting and informative, and very useful command line options
-that I've found, are here. Split. So split or spliced ban alignments
-are reported as separate ban entries. They are split at the NCR operations which
-correspond to influence in then Is priced alignments. And there's also this cigar option which
-will add the cigar stream to the bed entry as the seventh column. So let's give it a try and we'll try this
-with our alignment file in A1 to A1-4. So first bamtobed. Let's type the input in 814.bam,
-and let's modulate this. So, as command line parameters,
-let's use cigar. And we're not going to use the option
-[INAUDIBLE], let's see what we obtain. So as you can tell, there's one line for
-every alignment in the ban file, chromosome and it's bed format,
-chromosome start and end position. Then we have the identifier, ID photo
-read, plus strain, not sure what this is. And then we have the cigar. And for the purposes of illustrating
-how the split reads are being manipulated here,
-I like to pick one of these. Let's find one that's
-fairly easy to remember. Let's mark down this alignment here. 3, 7, 0, 4, 0, 0, aqnd this large alignment. And you might notice
-the span of the alignment, the alignment spans somewhere
-around 170,000 bases. So that's a very long tool interval. I'm going to copy this And we'll remember that it starts at
-chromosome one, position 14,806 and so on. So, that is running bedtools, BAM to BED. And specifying the cigar and to convert
-from a BAM format to a BED format. Now let's use the option of split. Okay? And you might not be able to see here. So the cigar option is not valid here. It's not effective but
-I'm going to do a grip on err188, and I think I actually have that, yes. And let's see what we get. So you might remember that there were two. Okay, this probably now that
-those all chromosome one. It has multiple locations on the genome. So, as you can tell here it
-is split in the number, so this was the first alignment,
-the short one and then the long alignment is
-actually shown as two blocks here. A block is 24 bases long, actually 23, and another block is about
-170 thousand bases away. So it corresponds to the two pieces on the two X zones,
-separated by the interrupt. So ban to bed with the split
-option will split the alignments, spliced alignments, into a number of
-blocks that correspond to the number of X zones that are contained in that
-aren't covered by that align. And it's probably the more
-correct way to look at it. Now we can also perform
-the operation in reverse. So we can start with a bed file and
-convert it into a bend file. So let's see the format bedtools, the command line usage for bed to bam. And the usage is fairly simple bedtools,
-bed to bam. A number of options dash
-I the input of which can be in any of the three
-formats specified here. Bed GFF and VCF, and then a genome. Now the genome file has
-a very specific format, it's not really a genome
-file it's a header file. And I'm going to
-demonstrate by showing you basically it contains the identifier for
-the chromosome. Followed by the length of the chromosome
-and that's all that it needs. So now let's illustrate by
-transform by converting from one of those three formats and
-location formats. Lets write the input first,
-fc.gtf, let's say. Genome ht38c, okay. And notice that one of
-them options here is that. The bed12. The BAM CIGAR string
-will reflect the block. So it's related to the split option that we saw in the previous subcommand. So now let's run bedtools bedtobam
-without using the bed 12. Let's see what we get. Okay, and indeed we should have
-saved that into refseq.bam. And now we can use samtools view
-to look at the refseq.bam and you can see it here, Chromosomes,
-start position, and so on. As you can see the output
-contains one line for every exon, represented on the line. We're going to repeat this operation. Now with the RefSeq.bed, b, e, d. We're going to save that as,
-again, over sim refseq.bam. And would send towards you, we can now view
-the contents of these five. Okay, and what you will notice here,
-for instance, right from the very first line is that there is one line now,
-one alignment, for each gene. But notice the length. The cigar string corresponding
-to the first alignment, 59,129. This is because it contains the inference. So it is shown as an alignment
-that starts at the beginning of the gene and
-ending at this very last nucleotide. But containing all the intervening
-inferring positions. So if we want to show
-a more realistic picture of the alignment that shows
-introns that separate exons, then we need to specify That we want,
-that the input. Is embed 12. So now let's look at
-that particular output. Santours view refsig.bam [NOISE] Okay. And now you can see that
-the cigar string truly represents the axon internal structure of the gene,
-62. The first axon in this gene will have
-62 bases, followed by an interval of 12,698 bases, followed by
-an external plane 54, and so on. So careful about the use of
-this split modulator in this particular types of operations. We can use these conversions in order
-to go from a BAM format to a BED formatted file and
-therefore use it in overlap or intersect type of operations
-using vectors intersect. So this is what we could do,
-for instance with the alignment card NA12814.map,
-however, we won't illustrate it here. There is one exercise that
-you can take from home. The last operation, the one that can
-perform with bed tools would be. I will be able to illustrate. So, given a set of intervals
-represented into a format such as GPS. So seven genome allocations. The comments sacrament
-get facade announce one to retreat the facade sequences
-corresponding to those annotations. You might find these useful
-in the number of operations. For instance, if you want to calculate for
-sequence operations of gene operations such as determining
-the longest open reading frame. Or for instance to create an index for
-trans subatomic analysis. Which is what we're going to
-be covering in lecture four. So let's get started. Just like before, we'll look at
-the command line then options bedtools, getfasta, and then help. So the format is bedtools
-getfasta a number of options, inputfasta file,
-which corresponds to the genome so that's a genome file, then a bid five,
-that corresponds to the annotations. Then finally the output fast data file. There there a couple of. There are a few options here. So input split again, so in the case where we have bad records that contain blocks,
-for instance axons within a G. So let's give this a try,
-bedtools getfasta, we keep the options, -fi, and this is going to be the genome, 2, 2, 3. Hg38c.fa -bed, and let's start with RefSeq.gtf. And the output can be refsic.gtf.foxstate. Genomes, that's a typo so
-we'll correct that. Lets verify that it's there. Oh yes. Hg38, sorry about that. And now lets look at
-the file ref c.jpf.fast Okay. And then there's going to be one line for
-every exon, or for every feature in the jpf file. So it's more useful, in fact,
-to use RefSeq as a bed file. So let's see what we obtained
-without the additional modulators. So we'll store the output. Input file genome file. We have a bed file, RefSeq.bed,
-the output is RefSeq.bed.fasta. So now let's look at RefSeq.bed.fasta. And now you see that we have very,
-very long lines. And why is that? Because we used a BED formatted file,
-which contained one line for every gene. And given that we did not
-specify that they are blocks. That each line consists of block. Exonic blocks interspersed by introns,
-then the full interval from the beginning to end of the genes was considered
-as the span of the gene. So this corresponds to the genomic
-sequence containing introns and exons and introns at that particular genes block. So we can change that. Let's look at these. And we can use split to indicate that our bed file contains multiple blocks for entry. And now If we view the file, we're going to recognize that each gene
-has its appropriate, its correct length. So the exonic blocks, the fasta sequence
-is called corresponding to exonic blocks, were extracted and then they were together
-to form the entire sequence of the gene. So we have just illustrated how to use,
-overall we have just illustrated how to use bedtools in order to
-perform genome arithmetic and other manipulations of sequences and
-genomic features. And with this our second lecture, on
-Sequences in Genomic Features is complete. See you next time."
+"In this section,
+we are going to be looking at BEDtools, which comprising a suite of tools of
+performing genome arithmetic, and more generally, looking at how we can
+manipulate intervals and genomic features represent these intervals, or
+groups of intervals along the genome. BEDtools is a versatile suite
+which contains tools for not only general arithmetic, but
+also for converting from one format to another, and also for
+sequence manipulation such as extracting sequences within
+a certain range or interval. So, we're going to get started. First, we're going to look
+at BEDtools intersect, which allows us to determine overlaps
+between sets of gene annotations. And then we're going to
+look at some of the other types of operations that it allows. We illustrate that going back, with a
+suite of examples, and with two questions. So, let's look at them,
+let's look at the data files, you may recall that earlier in
+the session, we downloaded a number of annotations from various
+edit post stories. For instance we downloaded
+the set of Alus annotation in the Alus.bed file listed here. Those are [INAUDIBLE]. We also downloaded
+the RefSeg gene annotations, and we extracted those in both bed and
+gtf format. So, let me show you a little bit just
+the header of each of these files. Let's use head to show the top
+ten lines of the Alus file. So, we have them representing
+every location on the genome. Chromosomes start, end, the name, a numerical value, and
+then plus or minus trend. Then for the RefSeq file, for
+the gtf file, head RefSeq.gtf. So the gtf format, you can see it here, there's one line
+corresponding to every exon as a feature. And then exon lines
+are grouped by the gene. So, for instance,
+the top three lines correspond to the gene non-coding gene
+NR_110761 in the RefSeq database. We have the nine columns just to
+remind you, chromosome, the source and then the type of feature exon or
+start_codon CDS sometimes is transferred. Start and end coordinates of
+the feature along the genome. Then a numerical value that represents
+a score, used for visualization, but not used here. The information about the reading
+frame in this coding sequence. And then the ninth column contains some
+general information about the gene identifier, transcript identifier,
+sometimes expression and other types of connotations. So this a gtf format, you also have
+the same information but in bed format. Where now, we have one line
+corresponding to every gene. Each gene is shown with its
+corresponding exons as block, separated by commas here
+in the last few columns. Same information,
+just a more compacted presentation. These are the two types of
+genomic features that we have. We also have a set of
+alignments NA12814.ban in which we align RefSeq alignments, a subset of alignments from a sample. Let's take a look at what this looks like. Samtools view. Okay. Seventy five and so on. And they were both read one and
+in read two. As you might recall,
+the we determined that. Now using this set of operations, we might ask when to ask, let's say
+the formal interbiological questions. The first one might be,
+give me all the exons or all the genes, or all the transcripts that contain Alus or
+in other words it overlap Alus. And the other one might be
+give me all the alignments or expressed RNA segments that overlap Alus. So give me the expressed Alus
+as represented in this sample. And we're going to try to answer
+both of them, the first one. Now at the second one after we
+are looking at the numbers segment. So for this purpose lets start by
+looking at backtools common and see what are the particular operations. So backtools, if I just type backtools
+you will see that I get a very long. A very long listing of all the command
+line options that one can use and of the sub commands that one can use. So in order to better view these and
+to be able to take my time analyzing them, I'm going to just redirect
+the standard output, the standard error to a file
+lets call bedtools.log. Now I can simply open it and
+I can look at what is the functionality. You can see that BEDtools number is
+a very versatile suite of tools and performs a number of different
+types of operations. Perhaps the most important and the most
+popular are the genome arithmetic. First of all, intersection, finding
+overlapping intervals in various ways. But also identifying the closest and
+potentially non overlapping interval, or clustering intervals,
+subtracting intervals, and so on. But it's only one fo the types of
+operations if you're going and scrolling down. Another one that I will be demonstrating,
+and check our use for, is to perform format conversion,
+particularly to transform bamtobed format. Conversely, go from bedtobam. Then there are also some subcommands for
+sequence manipulation. For instance, getfasta to extract
+the fast a sequences for given at least an intervals, so gene annotations
+represent as a gtf or bed file. So with this in mind, it's the intersect
+supplement is the one that we want. And let's do a singular operation here. So we're going to see what are the options
+for the command line intersect. And that should have back doors. And the basic command line
+is bedtools intersect, a list of options which we can read below. And then the two files
+containing intervals, or annotations that need to be intersected. Introduce with -a and -b. So let's look at the options. First so the input can be the type
+of input if it can be a bam file, and then the output, whether we want
+the output to be bed file in that case. But a more important list is the type
+of output, so the option wa for instance, we'll import your genome entry
+in A every time there is an overlap. For every feature that contains
+an overlap featuring the first file. Conversely, the option -wb will write the
+original entry in B in the second file for every overlap for the feature in A. There's also an option, wo, that's more informative in the sense
+that it will write for every overlap. It will write the original A and B entries
+that overlap, concatenated along one line. And at the end of that line, it will list
+the number of bases that form the overlap. And then there's a parallel option to
+that, wao, that will again write the A and B entries concatenated and
+the number of base overlaps but instead of reporting only the features
+that contain overlap from a file A, it will report all entries in A. There are also a number of parameters, parameter options that look at how to
+qualify, how to modulate the output. For instance, by default,
+two features are reported as overlapping. The overlap is at least one base pair. These can be changed with
+the command line -f to be a fraction of the length of the featuring A so
+50% of the length. And then there's also
+the option -r that comes with -f which requires that
+the fraction of overlap be applied equally to A and B, so
+50% should be 50% of the A feature containing the overlap as well as 50%
+of the features containing the overlap. And these are some of those that I will
+be illustrating try to remember them. Perhaps one more that
+is very important split in case we have a BED entry
+BED12 it's called here, corresponding to one genome to one
+transfer that contains multiple blocks. In this case multiple exons. Then each one of those blocks or exons should be considered a different
+annotation in the intersection and same thing for
+spliced alignments in the SAN file. The default option with the C and
+alignment as a single segment starting at the start coordinate and
+ending at the end coordinate and also containing the intervening features,
+intervening features. So we definitely want to use split
+when we're looking at BAM files, or BED lines that contain corrections. So let's try now to answer
+the question of how many exons transcripts slash
+transcripts and slash genes. In the reference connotation contain Alus,
+using the vectors to intersect from the end let's
+get the file names first. Let's say RefSeq in gtf format. The second one is
+compared to the Alus.bed, now let's see what we
+want to have reported. And let's assume that we want to have
+reported only the lines that contain the overlaps and we would also like
+to know the extent of the overlap. The number of business
+that contain the overlap. So just running this, okay, and if we look at the output, the first
+nine columns that I'm highlighting, refer to the feature in the A file
+in the RefSeq.gtf file. You will recognize the characteristic
+format, chromosome, source, feature type, which is x and y coordinates, and so on. Three more columns. Followed by information about the gene and
+transcript. Then the second set of columns refer to
+the overlapping feature in the B file. So that's the Alus. One, two, three, four,
+five, six, six columns. Chromosome location within
+the chromosome will start end Alus, the numerical value of. And lastly, we have the number
+of base pairs in the overlaps. So, 309 pairs on the overlap. So let's see how many
+such features we have. And we have 452 exons that
+overlap on this feature. Now let's see how many genes
+do they correspond to. And to do so, you might recall that
+the gene ID is located in column nine. So we're going to cut using
+the tab as delimiter, which is the default delimiter,
+we're going to cut column nine. Now within column nine,
+we're going to again identify column two, which contains the gene information. And we'll use the separator,
+a space as a separator, a single space, then column two,
+and let's see what we get. So these are all the genes,
+sometimes specified twice or three times depending on the number
+of exons that overlap Okay, but the genes that had overlapped with exons. So now we can, to identify to
+determine the number of genes, we're going to sort uniquely,
+and then count. So we have 452 exons corresponding
+to 259 genes that overlap exons. And we can answer the question
+on transcripts in a similar way. So this is how we could use
+the vectors intersect command for a simple intersection analysis. Now, let's assume,
+let's use, in this case, in the gtf format, every line was
+a separate feature, separate exon. Now let's use the RefSeq BD. The BED format where one gene
+is represented by one line with multiple intervals and see what we get. So we will recognize the BED format,
+okay theres one, two, three. Twelve entries here,
+12 columns followed by the six columns corresponding to the Alus and
+finally the amount of the overlap. What you might recall, however, was that
+in this case the entire span of the genome is going to be considered for the overlap. So let's see just. For information purposes
+how many lines we have. And we have 33,607. So we definitely want to split this, we want to add the common
+line option split so each exon is going to be
+considered as a separate interval. And that brings it down to 432 feature, which is much closer to the ones
+that we noticed earlier. So if you consider that as
+being a split interval. One more option here. What happens if we're adding wao. I like to show you. So in this case, if you're looking
+at the last, in this case, we have all the features in A represented
+whether they do have an overlap or not. And you will see that why the first
+line shows an overlap feature. The second line here
+will show you the gene, followed by a no entry in the alu file, which is represented by a .,
+-1, -1, and so on. So that's a way of
+representing no features. So in most of the cases you
+will be interested in using the -wo overlap only lines. So this concludes the illustration on
+how we can use betters intersect to generate the intersection
+of two sets of allocations. In the next session we'll be looking
+other functionality provided by BEDtools."
